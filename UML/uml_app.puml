@@ -1,0 +1,63 @@
+@startuml
+class app.BuilderPatternDemo {
++ {static} void main(String[])
+}
+class app.producers.TshirtProducer {
++ String name()
+}
+interface app.entities.Item {
+~ String name()
+~ float price()
+~ Producer producer()
+}
+abstract class app.entities.Cap {
++ Producer producer()
++ {abstract}float price()
+}
+class app.products.WhiteCap {
++ float price()
++ String name()
+}
+class app.entities.Order {
+~ List<Item> items
++ void addItem(Item)
++ float getCost()
++ void showItems()
+}
+class app.producers.CapProducer {
++ String name()
+}
+class app.products.BlackCap {
++ float price()
++ String name()
+}
+class app.products.RedTshirt {
++ float price()
++ String name()
+}
+abstract class app.entities.Tshirt {
++ Producer producer()
++ {abstract}float price()
+}
+class app.builder.OrderBuilder {
++ Order orderA()
++ Order orderB()
+}
+interface app.producers.Producer {
+~ String name()
+}
+class app.products.BlueTshirt {
++ float price()
++ String name()
+}
+
+
+app.producers.Producer <|.. app.producers.TshirtProducer
+app.entities.Item <|.. app.entities.Cap
+app.entities.Cap <|-- app.products.WhiteCap
+app.producers.Producer <|.. app.producers.CapProducer
+app.entities.Cap <|-- app.products.BlackCap
+app.entities.Tshirt <|-- app.products.RedTshirt
+app.entities.Item <|.. app.entities.Tshirt
+app.entities.Tshirt <|-- app.products.BlueTshirt
+@enduml
